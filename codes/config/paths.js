@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
@@ -11,15 +9,14 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
-function ensureSlash(path, needsSlash) {
-  const hasSlash = path.endsWith('/');
+function ensureSlash(servedUrl, needsSlash) {
+  const hasSlash = servedUrl.endsWith('/');
   if (hasSlash && !needsSlash) {
-    return path.substr(path, path.length - 1);
+    return servedUrl.substr(servedUrl, servedUrl.length - 1);
   } else if (!hasSlash && needsSlash) {
-    return `${path}/`;
-  } else {
-    return path;
+    return `${servedUrl}/`;
   }
+  return servedUrl;
 }
 
 const getPublicUrl = appPackageJson =>
@@ -42,6 +39,7 @@ function getServedPath(appPackageJson) {
 module.exports = {
   dotenv: resolveApp('.env'),
   appBuild: resolveApp('build'),
+  appConfig: resolveApp('config'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.js'),
@@ -51,5 +49,5 @@ module.exports = {
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json')),
+  servedPath: getServedPath(resolveApp('package.json'))
 };
