@@ -1,3 +1,7 @@
+/**
+ * @file webpack 开发模式配置
+ * @see https://doc.webpack-china.org/configuration/
+ */
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
@@ -10,106 +14,122 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
-// Webpack uses `publicPath` to determine where the app is being served from.
-// In development, we always serve from the root. This makes config easier.
+// Webpack 使用 `publicPath` 来确定应用程序在哪里发送。
+// 在开发模式中，我们始终从 root 上服务。这使配置更容易。
 const publicPath = '/';
-// `publicUrl` is just like `publicPath`, but we will provide it to our app
-// as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
-// Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
+// `publicUrl` 就像`publicPath`，但是我们将把它提供给我们的应用程序，
+// 就像 ％PUBLIC_URL％ 在 'index.html` 和 'process.env.PUBLIC_URL` 在 JavaScript 中 。
+// 省略尾随斜线，%PUBLIC_PATH%/xyz 看起来比 %PUBLIC_PATH%xyz 好。
 const publicUrl = '';
-// Get environment variables to inject into our app.
+// 获取环境变量以注入到应用程序中。
 const env = getClientEnvironment(publicUrl);
 
-// This is the development configuration.
-// It is focused on developer experience and fast rebuilds.
-// The production configuration is different and lives in a separate file.
+// 这是开发模式配置。
+// 它专注于开发人员的经验和快速的重新构建。
+// 与生产模式配置不同，它存在于一个单独的文件中。
 module.exports = {
-  // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-  // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
+
+  // 通过在浏览器调试工具(browser devtools)中添加元信息(meta info)增强调试
   devtool: 'cheap-module-source-map',
-  // These are the "entry points" to our application.
-  // This means they will be the "root" imports that are included in JS bundle.
-  // The first two entry points enable "hot" CSS and auto-refreshes for JS.
+
+  // webpack 打包入口
+  // 这意味着它们将是 JS 捆绑包中包含的根
+  // 前两个入口点启用 "hot" CSS 和自动刷新 JS。
   entry: [
-    // We ship a few polyfills by default:
+
+    // 我们默认加载几个 polyfills
     require.resolve('./polyfills'),
-    // Include an alternative client for WebpackDevServer. A client's job is to
-    // connect to WebpackDevServer by a socket and get notified about changes.
-    // When you save a file, the client will either apply hot updates (in case
-    // of CSS changes), or refresh the page (in case of JS changes). When you
-    // make a syntax error, this client will display a syntax error overlay.
-    // Note: instead of the default WebpackDevServer client, we use a custom one
-    // to bring better experience for Create React App users. You can replace
-    // the line below with these two lines if you prefer the stock client:
+
+    // 为 WebpackDevServer 添加备用客户端。
+    // 客户端的工作是通过 socket 连接到 WebpackDevServer，并获得有关更改的通知。
+    // 保存文件时，客户端将应用热更新（在更改CSS的情况下）或刷新页面（如果是JS更改）。
+    // 当您发出语法错误时，此客户端将显示语法错误覆盖。
+    // 注意：代替默认的 WebpackDevServer 客户端，我们使用自定义的方式为创建 React App 用户带来更好的体验。
+    // 如果您喜欢 stock 客户端，您可以用以下两行代替以下行：
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
     require.resolve('react-dev-utils/webpackHotDevClient'),
-    // Finally, this is your app's code:
+
+    // 您的应用程序的代码入口
+    // 我们最后包含应用程序代码，以便如果在初始化期间有运行时错误，
+    // 它不会破坏 WebpackDevServer 客户端，并且更改 JS 代码仍将触发刷新。
     paths.appIndexJs
-    // We include the app code last so that if there is a runtime error during
-    // initialization, it doesn't blow up the WebpackDevServer client, and
-    // changing JS code would still trigger a refresh.
   ],
+
+  // webpack 如何输出结果的相关选项
   output: {
-    // Next line is not used in dev but WebpackDevServer crashes without it:
+
+    // 所有输出文件的目标路径
+    // 必须是绝对路径（使用 Node.js 的 path 模块）
+    // 下一行未在 dev 中使用，但是没有它 WebpackDevServer 会崩溃：
     path: paths.appBuild,
-    // Add /* filename */ comments to generated require()s in the output.
+
+    // 在输出中添加 /* filename */ 注释来生成require（）。
     pathinfo: true,
-    // This does not produce a real file. It's just the virtual path that is
-    // served by WebpackDevServer in development. This is the JS bundle
-    // containing code from all our entry points, and the Webpack runtime.
+
+    // 「入口分块(entry chunk)」的文件名模板
+    // 这不会产生真实的文件。
+    // 这只是WebpackDevServer在开发中提供的虚拟路径。
+    // 这是包含所有入口点的代码和Webpack运行时的JS包。
     filename: 'static/js/bundle.js',
-    // There are also additional JS chunk files if you use code splitting.
+
+    // 「附加分块(additional chunk)」的文件名模板（如果你使用代码分离）
     chunkFilename: 'static/js/[name].chunk.js',
-    // This is the URL that app is served from. We use "/" in development.
+
+    // 输出解析文件的目录，url 相对于 HTML 页面。开发模式下，我们使用 "/"
     publicPath,
-    // Point sourcemap entries to original disk location (format as URL on Windows)
+
+    // 将源映射条目指向原始磁盘位置（格式为Windows上的URL）
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
   },
+
+  // 解析模块请求的选项
   resolve: {
-    // This allows you to set a fallback for where Webpack should look for modules.
-    // We placed these paths second because we want `node_modules` to "win"
-    // if there are any conflicts. This matches Node resolution mechanism.
+
+    // 用于查找模块的目录。
+    // 我们把这些路径放在第二位，因为我们想要“node_modules”来“赢”
+    // 如果有任何冲突。这符合 Node 的解析机制。
     // https://github.com/facebookincubator/create-react-app/issues/253
     modules: ['node_modules', paths.appNodeModules].concat(
       // It is guaranteed to exist because we tweak it in `env.js`
       process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
     ),
-    // These are the reasonable defaults supported by the Node ecosystem.
-    // We also include JSX as a common component filename extension to support
-    // some tools, although we do not recommend using it, see:
-    // https://github.com/facebookincubator/create-react-app/issues/290
-    // `web` extension prefixes have been added for better support
-    // for React Native Web.
-    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
-    alias: {
 
-      // Support React Native Web
+    // 使用的扩展名
+    extensions: ['.js', '.json', '.jsx'],
+
+    // 模块别名列表
+    alias: {
+      // 支持 React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
     },
+
+    // 附加插件列表
     plugins: [
-      // Prevents users from importing files from outside of src/ (or node_modules/).
-      // This often causes confusion because we only process files within src/ with babel.
-      // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-      // please link the files into your node_modules/ and let module-resolution kick in.
-      // Make sure your source files are compiled, as they will not be processed in any way.
+
+      // 防止用户从 src /（或node_modules/）外部导入文件。
+      // 这通常会导致混乱，因为我们只处理 src/ 中的文件与 babel。
+      // 为了解决这个问题，我们阻止你从 src/ 外部导入文件。
+      // 如果你非要这么做，请将文件链接到您的 node_modules/，并让 module-resolution 起作用。
+      // 确保你的源文件被编译，因为它们不会以任何方式处理。
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
     ]
   },
+
+  // 模块配置
   module: {
     strictExportPresence: true,
-    rules: [
-      // TODO: Disable require.ensure as it's not a standard language feature.
-      // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
-      // { parser: { requireEnsure: false } },
 
-      // First, run the linter.
-      // It's important to do this before Babel processes the JS.
+    // 模块规则（配置 loader、解析器等选项）
+    rules: [
+
+      // 首先，运行 ESLint
+      // 在 Babel 处理 JS 之前做这件事很重要。
       {
         test: /\.(js|jsx)$/,
-        enforce: 'pre',
+        enforce: 'pre', // 标识应用这些规则，即使规则覆盖（高级选项）
         use: [
           {
             options: {
@@ -123,13 +143,10 @@ module.exports = {
         include: paths.appSrc
       },
       {
-        // "oneOf" will traverse all following loaders until one will
-        // match the requirements. When no loader matches it will fall
-        // back to the "file" loader at the end of the loader list.
+        // “oneOf”将遍历所有以下 loader，直到有一个符合要求。
+        // 当没有 loader 匹配时，它会返回 loader 列表末尾的 loader。
         oneOf: [
-          // "url" loader works like "file" loader except that it embeds assets
-          // smaller than specified limit in bytes as data URLs to avoid requests.
-          // A missing `test` is equivalent to a match.
+          // url-loader 就像 file-loader 一样工作，但如果文件小于限制，则可以返回 DataURL。
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),
@@ -138,24 +155,23 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]'
             }
           },
-          // Process JS with Babel.
+          // JS 解析器，使得浏览器可以识别 ES6/React 等语法
           {
             test: /\.(js|jsx)$/,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-
-              // This is a feature of `babel-loader` for webpack (not Babel itself).
-              // It enables caching results in ./node_modules/.cache/babel-loader/
-              // directory for faster rebuilds.
+              // 这是 babel-loader（不是Babel本身）的一个功能。
+              // 它允许缓存结果在 ./node_modules/.cache/babel-loader/ 目录下，使得重新构建更快。
               cacheDirectory: true
             }
           },
-          // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
-          // "style" loader turns CSS into JS modules that inject <style> tags.
-          // In production, we use a plugin to extract that CSS to a file, but
-          // in development "style" loader enables hot editing of CSS.
+          // 这里的符号有点令人困惑。
+          // postcss-loader 将 autoprefixer 应用于我们的CSS。
+          // css-loader 解析 CSS 中的路径，并将资源添加为依赖关系。
+          // style-loader 通常将 CSS 转换为注入<style>的 JS 模块，
+          // 在生产模式中，我们使用一个插件将该 CSS 提取到一个文件中，
+          // 但在开发模式中，style-loader 可以实现对 CSS 的热编辑。
           {
             test: /\.css$/,
             use: [
@@ -169,7 +185,7 @@ module.exports = {
               {
                 loader: require.resolve('postcss-loader'),
                 options: {
-                  // Necessary for external CSS imports to work
+                  // 导入外部 CSS 时必不可少N
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
@@ -188,64 +204,68 @@ module.exports = {
               }
             ]
           },
-          // "file" loader makes sure those assets get served by WebpackDevServer.
-          // When you `import` an asset, you get its (virtual) filename.
-          // In production, they would get copied to the `build` folder.
-          // This loader doesn't use a "test" so it will catch all modules
-          // that fall through the other loaders.
+          // file-loader 确保资源文件最终在输出文件夹中。
+          // 当您导入资产时，您将获得其文件名。
+          // 这个装载器不使用“测试”，所以它将捕获所有未匹配其它 loader 的模块
           {
-            // Exclude `js` files to keep "css" loader working as it injects
-            // it's runtime that would otherwise processed through "file" loader.
-            // Also exclude `html` and `json` extensions so they get processed
-            // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
             loader: require.resolve('file-loader'),
+
+            // 排除`js`文件以保持 css-loader 在注入时工作
+            // 它是运行时，否则将通过 file-loader 处理。
+            // 还可以排除`html`和`json`扩展名，以便它们通过 webpack 内部装载机得到处理
+            exclude: [/\.js$/, /\.html$/, /\.json$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]'
             }
           }
+          // 【结束】如果需要添加新的 loader，请确保在 file-loader 之前。
         ]
       }
-      // ** STOP ** Are you adding a new loader?
-      // Make sure to add the new loader(s) before the "file" loader.
     ]
   },
   plugins: [
-    // Makes some environment variables available in index.html.
-    // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
-    // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    // In development, this will be an empty string.
+    // 使一些环境变量可用于JS代码。
+    // 例如：if（process.env.NODE_ENV ==='production'）{...}。请参阅 `./env.js`。
+    // 在这里设置 NODE_ENV 是绝对必要的。否则React将以非常缓慢的开发模式进行编译。
+    new webpack.DefinePlugin(env.stringified),
+
+    // Moment.js是一个非常受欢迎的日期相关的库，可以捆绑大型语言环境文件，默认情况下由于Webpack解释其代码。
+    // 这是一个实用的解决方案，要求用户选择导入特定区域设置。
+    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+    // 如果你不使用 Moment.js，可以移除
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    // 开启全局的模块热替换(HMR)
+    new webpack.HotModuleReplacementPlugin(),
+
+    // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
+    new webpack.NamedModulesPlugin(),
+
+    // 在 index.html 中提供一些环境变量。
+    // 公共 URL 在 index.html 中以 ％PUBLIC_URL％ 的形式提供，
+    // 例如：<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    // 在生产模式中，在 `package.json` 中指定 "homepage" ，它将是该URL的路径名；否则它将是一个空字符串，
     new InterpolateHtmlPlugin(env.raw),
-    // Generates an `index.html` file with the <script> injected.
+
+    // 使用注入的<script>生成一个`index.html`文件。
+    // @see https://github.com/jantimon/html-webpack-plugin
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml
     }),
-    // Add module names to factory functions so they appear in browser profiler.
-    new webpack.NamedModulesPlugin(),
-    // Makes some environment variables available to the JS code, for example:
-    // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
-    new webpack.DefinePlugin(env.stringified),
-    // This is necessary to emit hot updates (currently CSS only):
-    new webpack.HotModuleReplacementPlugin(),
-    // Watcher doesn't work well if you mistype casing in a path so we use
-    // a plugin that prints an error when you attempt to do this.
-    // See https://github.com/facebookincubator/create-react-app/issues/240
+
+    // 如果您在路径中输入错误的大小写，则 Watcher 无法正常工作，因此当您尝试执行此操作时，我们使用打印错误的插件。
+    // @see https://github.com/facebookincubator/create-react-app/issues/240
     new CaseSensitivePathsPlugin(),
-    // If you require a missing module and then `npm install` it, you still have
-    // to restart the development server for Webpack to discover it. This plugin
-    // makes the discovery automatic so you don't have to restart.
-    // See https://github.com/facebookincubator/create-react-app/issues/186
-    new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-    // Moment.js is an extremely popular library that bundles large locale files
-    // by default due to how Webpack interprets its code. This is a practical
-    // solution that requires the user to opt into importing specific locales.
-    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-    // You can remove this if you don't use Moment.js:
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+
+    // 如果您需要一个缺少的模块，然后 `npm install` 它 ，那么您仍然需要重新启动 Webpack 的开发服务器来发现它。
+    // 此插件可以自动发现缺少的模块，使您不必重新启动。
+    // @see https://github.com/facebookincubator/create-react-app/issues/186
+    new WatchMissingNodeModulesPlugin(paths.appNodeModules)
   ],
-  // Some libraries import Node modules but don't use them in the browser.
-  // Tell Webpack to provide empty mocks for them so importing them works.
+
+  // 某些库导入 Node 模块，但不要在浏览器中使用它们。
+  // 告诉 Webpack 为他们提供空的模拟，以便导入它们。
   node: {
     dgram: 'empty',
     fs: 'empty',
@@ -253,9 +273,8 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   },
-  // Turn off performance hints during development because we don't do any
-  // splitting or minification in interest of speed. These warnings become
-  // cumbersome.
+
+  // 在开发过程中关闭性能提示，因为我们不会为了追求速度进行代码分离或压缩。这些警告变得很麻烦。
   performance: {
     hints: false
   }

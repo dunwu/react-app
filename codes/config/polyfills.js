@@ -1,14 +1,13 @@
 if (typeof Promise === 'undefined') {
-  // Rejection tracking prevents a common issue where React gets into an
-  // inconsistent state due to an error, but it gets swallowed by a Promise,
-  // and the user has no idea what causes React's erratic future behavior.
+  // Rejection 跟踪防止了由于错误导致 React 进入不一致状态的常见问题，
+  // 但是它被 Promise 吞没，用户不知道 React 的未来行为是不稳定的原因。
   require('promise/lib/rejection-tracking').enable();
   window.Promise = require('promise/lib/es6-extensions.js');
 }
 
-// fetch() polyfill for making API calls.
+// fetch() 用于进行API调用的 polyfill。
 require('whatwg-fetch');
 
-// Object.assign() is commonly used with React.
-// It will use the native implementation if it's present and isn't buggy.
+// Object.assign() 常用于 React。
+// 如果它存在，将使用本地实现，但不是buggy。
 Object.assign = require('object-assign');

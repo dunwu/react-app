@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
 
-// Make sure that including paths.js after env.js will read .env variables.
+// 确保包含 env.js 之后的 paths.js 将会读取 .env 变量。
 delete require.cache[require.resolve('./paths')];
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -16,17 +16,16 @@ if (!NODE_ENV) {
 const dotenvFiles = [
   `${paths.dotenv}.${NODE_ENV}.local`,
   `${paths.dotenv}.${NODE_ENV}`,
-  // Don't include `.env.local` for `test` environment
-  // since normally you expect tests to produce the same
-  // results for everyone
+
+  // 对于 `test` 环境，不要包含 `.env.local`，因为通常你会希望测试能为每个人产生相同的结果
   NODE_ENV !== 'test' && `${paths.dotenv}.local`,
   paths.dotenv
 ].filter(Boolean);
 
-// Load environment variables from .env* files. Suppress warnings using silent
-// if this file is missing. dotenv will never modify any environment variables
-// that have already been set.
-// https://github.com/motdotla/dotenv
+// 从 .env* 文件加载环境变量。
+// 如果此文件丢失，请使用 silent 抑制警告。
+// dotenv 将永远不会修改任何已经设置的环境变量。
+// @see https://github.com/motdotla/dotenv
 dotenvFiles.forEach(dotenvFile => {
   if (fs.existsSync(dotenvFile)) {
     require('dotenv').config({
@@ -35,15 +34,15 @@ dotenvFiles.forEach(dotenvFile => {
   }
 });
 
-// We support resolving modules according to `NODE_PATH`.
-// This lets you use absolute paths in imports inside large monorepos:
-// https://github.com/facebookincubator/create-react-app/issues/253.
-// It works similar to `NODE_PATH` in Node itself:
+// 我们支持根据 `NODE_PATH` 解析模块。
+// 这使您可以在导入大型 monorepos 中使用绝对路径：
+// https://github.com/facebookincubator/create-react-app/issues/253。
+// 它的工作类似于 Node 本身的 `NODE_PATH`：
 // https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders
-// Note that unlike in Node, only *relative* paths from `NODE_PATH` are honored.
-// Otherwise, we risk importing Node.js core modules into an app instead of Webpack shims.
+// 请注意，与 Node 不同，只有来自 `NODE_PATH` 的相对路径才能得到认可。
+// 否则，我们有可能将 Node.js 的核心模块导入到应用程序而不是 Webpack 垫片。
 // https://github.com/facebookincubator/create-react-app/issues/1023#issuecomment-265344421
-// We also resolve them to make sure all tools using them work consistently.
+// 我们也解决了这些问题，确保使用它们的所有工具始终如一地工作
 const appDirectory = fs.realpathSync(process.cwd());
 process.env.NODE_PATH = (process.env.NODE_PATH || '')
   .split(path.delimiter)
@@ -51,8 +50,8 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
   .map(folder => path.resolve(appDirectory, folder))
   .join(path.delimiter);
 
-// Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
-// injected into the application via DefinePlugin in Webpack configuration.
+// 抓取 NODE_ENV 和 REACT_APP_* 环境变量，
+// 并通过 Webpack 配置中的 DefinePlugin 将它们预先注入到应用程序中。
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
@@ -64,17 +63,17 @@ function getClientEnvironment(publicUrl) {
         return env;
       },
       {
-        // Useful for determining whether we’re running in production mode.
-        // Most importantly, it switches React into the correct mode.
+        // 用于确定我们是否以生产模式运行。
+        // 最重要的是，它将 React 切换到正确的模式。
         NODE_ENV: process.env.NODE_ENV || 'development',
-        // Useful for resolving the correct path to static assets in `public`.
-        // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
-        // This should only be used as an escape hatch. Normally you would put
-        // images into the `src` and `import` them in code to get their paths.
+
+        // 用于解决 `public` 中静态资源的正确路径。
+        // 例如，<img src={process.env.PUBLIC_URL + '/img/logo.png'} />。
+        // 这只能用作逃生舱口。通常情况下，您可以在代码中将图像放入 `src` 和 `import` ，以获取路径。
         PUBLIC_URL: publicUrl
       }
     );
-  // Stringify all values so we can feed into Webpack DefinePlugin
+  // 对所有值进行排序，以便我们可以进入 Webpack DefinePlugin。
   const stringified = {
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key]);
