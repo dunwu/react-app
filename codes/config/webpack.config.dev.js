@@ -172,6 +172,9 @@ module.exports = {
           // style-loader 通常将 CSS 转换为注入<style>的 JS 模块，
           // 在生产模式中，我们使用一个插件将该 CSS 提取到一个文件中，
           // 但在开发模式中，style-loader 可以实现对 CSS 的热编辑。
+          // @see https://github.com/webpack-contrib/style-loader
+          // @see https://github.com/webpack-contrib/css-loader
+          // @see https://github.com/postcss/postcss-loader
           {
             test: /\.css$/,
             use: [
@@ -203,6 +206,23 @@ module.exports = {
                 }
               }
             ]
+          },
+          // less 完全兼容 css 语法。对于 less 文件，先交给 style-loader 、css-loader 处理。
+          // 如果存在 less 自身的特性，则交给 less-loader 去处理。
+          // @see https://github.com/webpack-contrib/less-loader
+          {
+            test: /\.less$/,
+            use: [{
+              loader: 'style-loader'
+            }, {
+              loader: 'css-loader'
+            }, {
+              loader: 'less-loader',
+              options: {
+                strictMath: true,
+                noIeCompat: true
+              }
+            }]
           },
           // file-loader 确保资源文件最终在输出文件夹中。
           // 当您导入资产时，您将获得其文件名。

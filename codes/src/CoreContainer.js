@@ -1,7 +1,7 @@
 import { Breadcrumb, Icon, Layout, Menu } from 'antd';
 import React from 'react';
 import App from './App';
-import './CoreContainer.css';
+import './CoreContainer.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;

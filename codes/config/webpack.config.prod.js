@@ -176,6 +176,9 @@ module.exports = {
           // 这样，我们实际上是在生产环境输出一个单独的CSS文件，而不是在JS代码中注入<style>标签。
           // 但是，如果您使用代码分割，则任何异步包仍然使用 style-loader 解析异步代码中的 CSS，
           // 因此它们不会出现在 main CSS 文件中。
+          // @see https://github.com/webpack-contrib/style-loader
+          // @see https://github.com/webpack-contrib/css-loader
+          // @see https://github.com/postcss/postcss-loader
           {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract(
@@ -215,6 +218,34 @@ module.exports = {
               )
             )
             // 注意：如果`plugins`中没有 ExtractTextPlugin，这将不起作用。
+          },
+          // less 完全兼容 css 语法。对于 less 文件，先交给 style-loader 、css-loader 处理。
+          // 如果存在 less 自身的特性，则交给 less-loader 去处理。
+          // 与开发模式不同，这里使用了 ExtractTextPlugin
+          // @see https://github.com/webpack-contrib/less-loader
+          {
+            test: /\.less$/,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: require.resolve('style-loader'),
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap
+                      }
+                    },
+                    {
+                      loader: require.resolve('less-loader')
+                    }
+                  ]
+                },
+                extractTextPluginOptions
+              )
+            )
           },
           // file-loader 确保资源文件最终在输出文件夹中。
           // 当您导入资产时，您将获得其文件名。
