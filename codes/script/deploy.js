@@ -11,7 +11,7 @@ ghpages.publish('build', {
   message: `Deploy demo v${version}`,
   user: {
     name: 'Zhang Peng',
-    email: 'atlantis1024@163.com'
+    email: 'forbreak@163.com'
   }
 }, (err) => {
   if (err) {
@@ -19,5 +19,5 @@ ghpages.publish('build', {
     console.log(chalk.bold.red(err));
     throw err;
   }
-  console.log(chalk.bold.yellow('Site has been deployed to \n\t https://zp1024.github.io/react-app/demos/'));
+  console.log(chalk.bold.yellow('Site has been deployed to \n\t https://dunwu.github.io/react-app/demos/'));
 });
