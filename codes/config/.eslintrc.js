@@ -38,6 +38,7 @@ module.exports = {
     /* @see https://github.com/yannickcr/eslint-plugin-react */
     'react/no-multi-comp': 'off', // 防止每个文件有多个组件定义
     'react/prop-types': 'off', // 防止在 React 组件中没有对 props 的校验
+    'react/forbid-prop-types': 'off',
     'react/prefer-stateless-function': 'off', // 强制无状态 React 组件为纯函数
     'react/jsx-filename-extension': 'off',  // 限制可能包含 JSX 的文件扩展名
 

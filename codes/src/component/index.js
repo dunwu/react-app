@@ -7,3 +7,4 @@ export { default as Navpath } from './layout/navpath/Navpath';
 
 /* 容器 */
 export { default as CoreContainer } from './container/CoreContainer';
+export { default as RootContainer } from './container/RootContainer';

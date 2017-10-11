@@ -5,8 +5,10 @@
  */
 import { Layout } from 'antd';
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { configRoute } from '../../common';
+import { NotFoundView } from '../../feature';
 import { Content, Footer, Header, Sider } from '../';
-import { Welcome } from '../../feature';
 import './CoreContainer.less';
 
 /**
@@ -22,7 +24,12 @@ class CoreContainer extends React.PureComponent {
         <Layout>
           <Header />
           <Content>
-            <Welcome />
+            <Switch>
+              {configRoute.childRoutes.map((route) => (
+                <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+              ))}
+              <Route path="*" component={NotFoundView} />
+            </Switch>
           </Content>
           <Footer />
         </Layout>

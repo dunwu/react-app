@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
-import './Welcome.less';
+import './WelcomeView.less';
 
-class Welcome extends React.PureComponent {
+class WelcomeView extends React.PureComponent {
   render() {
     return (
       <div className="App">
@@ -17,4 +17,4 @@ class Welcome extends React.PureComponent {
     );
   }
 }
-export default Welcome;
+export default WelcomeView;

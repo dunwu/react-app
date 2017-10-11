@@ -31,9 +31,9 @@ const env = getClientEnvironment(publicUrl);
 
 // 这里断言是为了安全。
 // React 的开发模式构建比较慢，不适合于生产环境
-if (env.stringified['process.env'].NODE_ENV !== '"production"') {
-  throw new Error('Production builds must have NODE_ENV=production.');
-}
+// if (env.stringified['process.env'].NODE_ENV !== '"production"') {
+//   throw new Error('Production builds must have NODE_ENV=production.');
+// }
 
 // 注意：在这里定义，因为它将被使用不止一次。
 const cssFilename = 'static/css/[name].[contenthash:8].css';
