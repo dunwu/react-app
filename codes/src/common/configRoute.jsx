@@ -5,25 +5,21 @@
  * @see https://reacttraining.com/react-router/
  * @see https://reacttraining.cn/
  */
+import _ from 'lodash';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { CoreContainer } from '../component';
-import { HomeView, WelcomeView, MailboxView } from '../feature';
+import exampleRoutes from '../feature/example/route';
+import generalRoutes from '../feature/general/route';
+import specificRoutes from '../feature/specific/route';
 
 /**
  * 子路由表
  */
-export const childRoutes = [{
-  path: '/',
-  component: HomeView,
-  exact: true
-}, {
-  path: '/welcome',
-  component: WelcomeView
-}, {
-  path: '/mail',
-  component: MailboxView
-}];
+let tmpRoutes = [];
+tmpRoutes = _.concat(tmpRoutes, generalRoutes, specificRoutes, exampleRoutes);
+console.log('tmpRoutes', tmpRoutes);
+export const childRoutes = tmpRoutes;
 
 /**
  * 默认路由
@@ -35,5 +31,15 @@ const defaultRoutes = (
   </Switch>
 );
 
-const configRoute = { childRoutes, defaultRoutes };
+const RouteWithSubRoutes = (route) => (
+  <Route
+    path={route.path}
+    render={props => (
+      // pass the sub-routes down to keep nesting
+      <route.component {...props} routes={route.routes} />
+    )}
+  />
+);
+
+const configRoute = { childRoutes, defaultRoutes, RouteWithSubRoutes };
 export default configRoute;

@@ -29,8 +29,8 @@ const isActive = (path, history) => {
  */
 class CustomSider extends React.Component {
   state = {
-    openKey: 'sub0',
-    activeKey: 'menu0',
+    openKey: 'home',
+    activeKey: 'home',
     mode: 'inline'
   };
 

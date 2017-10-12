@@ -45,6 +45,7 @@
     ]
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
     "antd": "^2.13.4",
     "axios": "^0.16.2",
     "lodash": "^4.17.4",

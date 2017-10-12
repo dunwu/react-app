@@ -5,11 +5,20 @@
  */
 import { Layout } from 'antd';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { configRoute } from '../../common';
-import { NotFoundView } from '../../feature';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Content, Footer, Header, Sider } from '../';
+import { configRoute } from '../../common';
 import './CoreContainer.less';
+
+const RouteWithSubRoutes = (route) => (
+  <Route
+    path={route.path}
+    render={props => (
+    // pass the sub-routes down to keep nesting
+      <route.component {...props} routes={route.routes} />
+    )}
+  />
+);
 
 /**
  * 应用的核心容器组件
@@ -25,10 +34,13 @@ class CoreContainer extends React.PureComponent {
           <Header />
           <Content>
             <Switch>
-              {configRoute.childRoutes.map((route) => (
-                <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+              {configRoute.childRoutes.map((route, i) => (
+                <RouteWithSubRoutes
+                  key={i}
+                  {...route}
+                />
               ))}
-              <Route path="*" component={NotFoundView} />
+              <Redirect from="*" to="/404" />
             </Switch>
           </Content>
           <Footer />
