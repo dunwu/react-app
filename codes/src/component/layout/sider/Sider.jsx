@@ -3,12 +3,12 @@
  * @author Zhang Peng
  * @see https://ant.design/components/layout-cn/
  */
-import { Icon, Layout, Menu } from 'antd';
+import { Icon, Layout, Menu, Spin } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, matchPath, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import onMenuListSearch from '../../../feature/general/menu/actions';
+import { onMenuItemSelected, onMenuListSearch } from '../../../feature/general/menu/actions';
 import logoImg from './antd.svg';
 
 import './Sider.less';
@@ -34,39 +34,48 @@ class CustomSider extends React.Component {
     mode: 'inline'
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.onMenuListSearch();
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.list.forEach((item) => {
-      item.children.forEach((node) => {
-        if (node.url && isActive(node.url, this.props.history)) {
-          this.menuClickHandle({
-            key: `menu${node.key}`,
-            keyPath: [`menu${node.key}`, `sub${item.key}`]
+    if (nextProps.menu) {
+      if (this.props.menu.list !== nextProps.menu.list) {
+        nextProps.menu.list.forEach((item) => {
+          item.children.forEach((node) => {
+            if (node.url && isActive(node.url, this.props.history)) {
+              this.menuClickHandle({
+                key: `${node.key}`,
+                keyPath: [`${node.key}`, `${item.key}`]
+              });
+            }
           });
-        }
-      });
-    });
+        });
+      }
+    }
   }
 
   menuClickHandle = (item) => {
     this.setState({
       activeKey: item.key
     });
+    const selected = {
+      key: item.key,
+      keyPath: item.keyPath
+    };
+    this.props.onMenuItemSelected(selected);
   };
 
   render() {
-    const { list, history } = this.props;
+    const { menu, history } = this.props;
     let { activeKey, openKey } = this.state;
 
-    const _menuProcess = (nodes, pkey) => {
+    const transToAntMenus = (nodes, pkey) => {
       return Array.isArray(nodes) && nodes.map((item) => {
-        const menu = _menuProcess(item.children, item.key);
+        const menus = transToAntMenus(item.children, item.key);
         if (item.url && isActive(item.url, history)) {
-          activeKey = `menu${item.key}`;
-          openKey = `sub${pkey}`;
+          activeKey = `${item.key}`;
+          openKey = `${pkey}`;
         }
 
         switch (item.type) {
@@ -76,7 +85,7 @@ class CustomSider extends React.Component {
               key={item.key}
               title={<span><Icon type={item.icon} /><span className="nav-text">{item.title}</span></span>}
             >
-              {menu}
+              {menus}
             </Menu.SubMenu>
           );
         case 'ItemGroup':
@@ -85,7 +94,7 @@ class CustomSider extends React.Component {
               key={item.key}
               title={<span><Icon type={item.icon} />&nbsp;<span className="nav-text">{item.title}</span></span>}
             >
-              {menu}
+              {menus}
             </Menu.ItemGroup>
           );
         case 'Divider':
@@ -106,7 +115,10 @@ class CustomSider extends React.Component {
       });
     };
 
-    const menu = _menuProcess(list);
+    let antMenus;
+    if (menu.list) {
+      antMenus = transToAntMenus(menu.list);
+    }
 
     return (
       /**
@@ -125,16 +137,18 @@ class CustomSider extends React.Component {
             <span>REACT APP</span>
           </div>
         </div>
-        <Menu
-          className="ant-menu"
-          mode={this.state.mode}
-          theme="dark"
-          selectedKeys={[activeKey]}
-          defaultOpenKeys={[openKey]}
-          onClick={this.menuClickHandle}
-        >
-          {menu}
-        </Menu>
+        <Spin spinning={menu.loading} delay={500} size="large" tip="Loading...">
+          <Menu
+            className="ant-menu"
+            mode={this.state.mode}
+            theme="dark"
+            selectedKeys={[activeKey]}
+            defaultOpenKeys={[openKey]}
+            onClick={this.menuClickHandle}
+          >
+            {antMenus}
+          </Menu>
+        </Spin>
       </Sider>
     );
   }
@@ -142,12 +156,13 @@ class CustomSider extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    list: state.menu.list
+    menu: state.menu
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    onMenuListSearch: bindActionCreators(onMenuListSearch, dispatch)
+    onMenuListSearch: bindActionCreators(onMenuListSearch, dispatch),
+    onMenuItemSelected: bindActionCreators(onMenuItemSelected, dispatch)
   };
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomSider));

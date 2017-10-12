@@ -47,6 +47,7 @@
   "dependencies": {
     "antd": "^2.13.4",
     "axios": "^0.16.2",
+    "lodash": "^4.17.4",
     "react": "15.6.0",
     "react-dom": "15.6.0",
     "react-redux": "^5.0.6",
