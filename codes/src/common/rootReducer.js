@@ -6,7 +6,7 @@
  */
 import { routerReducer as router } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import menu from '../feature/general/menu/reducers';
+import menu from '../component/layout/sider/redux/reducers';
 
 const reducerMap = {
   router,

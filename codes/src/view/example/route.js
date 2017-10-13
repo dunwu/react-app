@@ -1,5 +1,5 @@
-import BasicAnimationView from './view/animation/BasicAnimationView';
-import ExampleAnimationView from './view/animation/ExampleAnimationView';
+import BasicAnimationView from './animation/BasicAnimationView';
+import ExampleAnimationView from './animation/ExampleAnimationView';
 
 export default [{
   path: '/example/animation/basic',

@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, matchPath, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { onMenuItemSelected, onMenuListSearch } from '../../../feature/general/menu/actions';
+import { onMenuItemSelected, onMenuListSearch } from './redux/actions';
 import logoImg from './antd.svg';
 
 import './Sider.less';

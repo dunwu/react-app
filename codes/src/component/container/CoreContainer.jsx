@@ -14,7 +14,6 @@ const RouteWithSubRoutes = (route) => (
   <Route
     path={route.path}
     render={props => (
-    // pass the sub-routes down to keep nesting
       <route.component {...props} routes={route.routes} />
     )}
   />
@@ -34,12 +33,10 @@ class CoreContainer extends React.PureComponent {
           <Header />
           <Content>
             <Switch>
-              {configRoute.childRoutes.map((route, i) => (
-                <RouteWithSubRoutes
-                  key={i}
-                  {...route}
-                />
+              {configRoute.childRoutes.map((route) => (
+                <RouteWithSubRoutes key={route.path} {...route} />
               ))}
+              <Redirect from="/" to="/home" />
               <Redirect from="*" to="/404" />
             </Switch>
           </Content>

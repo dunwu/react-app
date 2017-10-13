@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { createAction } from 'redux-actions';
-import http from '../../../http';
+import http from '../../../../http/index';
 import { MENU_LIST_SEARCH, MENU_LIST_SEARCH_FAILED, MENU_LIST_SEARCH_SUCCESS, MENU_ITEM_SELECTED } from './constants';
 
 // 查询菜单列表

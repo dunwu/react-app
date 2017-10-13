@@ -9,17 +9,13 @@ import _ from 'lodash';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { CoreContainer } from '../component';
-import exampleRoutes from '../feature/example/route';
-import generalRoutes from '../feature/general/route';
-import specificRoutes from '../feature/specific/route';
+import exampleRoutes from '../view/example/route';
+import generalRoutes from '../view/general/route';
 
 /**
- * 子路由表
+ * 合并所有路由
  */
-let tmpRoutes = [];
-tmpRoutes = _.concat(tmpRoutes, generalRoutes, specificRoutes, exampleRoutes);
-console.log('tmpRoutes', tmpRoutes);
-export const childRoutes = tmpRoutes;
+export const childRoutes = _.concat(generalRoutes, exampleRoutes);
 
 /**
  * 默认路由
@@ -31,15 +27,5 @@ const defaultRoutes = (
   </Switch>
 );
 
-const RouteWithSubRoutes = (route) => (
-  <Route
-    path={route.path}
-    render={props => (
-      // pass the sub-routes down to keep nesting
-      <route.component {...props} routes={route.routes} />
-    )}
-  />
-);
-
-const configRoute = { childRoutes, defaultRoutes, RouteWithSubRoutes };
+const configRoute = { childRoutes, defaultRoutes };
 export default configRoute;
