@@ -11,11 +11,12 @@ import { Route, Switch } from 'react-router-dom';
 import { CoreContainer } from '../component';
 import exampleRoutes from '../view/example/route';
 import generalRoutes from '../view/general/route';
+import uiRoutes from '../view/ui/route';
 
 /**
  * 合并所有路由
  */
-export const childRoutes = _.concat(generalRoutes, exampleRoutes);
+export const childRoutes = _.concat(generalRoutes, exampleRoutes, uiRoutes);
 
 /**
  * 默认路由

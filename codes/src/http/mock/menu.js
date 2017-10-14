@@ -30,6 +30,22 @@ module.exports = {
           ]
         }
       ]
+    },
+    {
+      key: 'ui',
+      title: 'UI',
+      icon: 'video-camera',
+      type: 'SubMenu',
+      children: [
+        {
+          key: 'general',
+          title: '一般',
+          type: 'ItemGroup',
+          children: [
+            { key: 'icon', title: '图标', type: 'Item', url: '/ui/icon' }
+          ]
+        }
+      ]
     }
   ]
 };

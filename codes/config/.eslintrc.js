@@ -41,6 +41,7 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/prefer-stateless-function': 'off', // 强制无状态 React 组件为纯函数
     'react/jsx-filename-extension': 'off',  // 限制可能包含 JSX 的文件扩展名
+    'react/no-array-index-key': 'off',   // 限制数组索引作为 key
 
     /* JSX 元素的 ESLint 检查规则 */
     /* @see https://github.com/evcohen/eslint-plugin-jsx-a11y */
