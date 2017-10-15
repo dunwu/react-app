@@ -8,8 +8,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, matchPath, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { onMenuItemSelected, onMenuListSearch } from './redux/actions';
 import logoImg from './antd.svg';
+import { onMenuItemSelected, onMenuListSearch } from './redux/actions';
 
 import './Sider.less';
 
@@ -82,6 +82,7 @@ class CustomSider extends React.Component {
         case 'SubMenu':
           return (
             <Menu.SubMenu
+              className="ant-menu-sub-menu"
               key={item.key}
               title={<span><Icon type={item.icon} /><span className="nav-text">{item.title}</span></span>}
             >
@@ -91,8 +92,14 @@ class CustomSider extends React.Component {
         case 'ItemGroup':
           return (
             <Menu.ItemGroup
+              className="ant-menu-item-group"
               key={item.key}
-              title={<span><Icon type={item.icon} />&nbsp;<span className="nav-text">{item.title}</span></span>}
+              title={
+                <span>
+                  <Icon type={item.icon} />&nbsp;
+                  <span className="nav-text">{item.title}</span>
+                </span>
+              }
             >
               {menus}
             </Menu.ItemGroup>
@@ -106,8 +113,15 @@ class CustomSider extends React.Component {
           return (
             <Menu.Item className="ant-menu-item" key={item.key}>
               {
-                item.url ? <Link to={item.url}>{item.icon && <Icon type={item.icon} />}{item.title}</Link> :
-                  (<span>{item.icon && <Icon type={item.icon} />}{item.title}</span>)
+                item.url ? (
+                  <Link to={item.url}>
+                    {item.icon && <Icon type={item.icon} />}<span className="nav-text">{item.title}</span>
+                  </Link>
+                ) : (
+                  <span>
+                    {item.icon && <Icon type={item.icon} />}<span className="nav-text">{item.title}</span>
+                  </span>
+                )
               }
             </Menu.Item>
           );

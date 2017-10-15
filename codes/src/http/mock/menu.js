@@ -33,17 +33,25 @@ module.exports = {
     },
     {
       key: 'ui',
-      title: 'UI',
-      icon: 'video-camera',
+      title: 'UI组件',
+      icon: 'scan',
       type: 'SubMenu',
       children: [
         {
           key: 'general',
-          title: '一般',
+          title: 'General',
           type: 'ItemGroup',
           children: [
             { key: 'button', title: '按钮', type: 'Item', url: '/ui/button' },
             { key: 'icon', title: '图标', type: 'Item', url: '/ui/icon' }
+          ]
+        },
+        {
+          key: 'feedback',
+          title: 'Feedback',
+          type: 'ItemGroup',
+          children: [
+            { key: 'alert', title: 'Alert警告提示', type: 'Item', url: '/ui/alert' }
           ]
         }
       ]
