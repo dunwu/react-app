@@ -42,6 +42,7 @@ module.exports = {
           title: '一般',
           type: 'ItemGroup',
           children: [
+            { key: 'button', title: '按钮', type: 'Item', url: '/ui/button' },
             { key: 'icon', title: '图标', type: 'Item', url: '/ui/icon' }
           ]
         }
