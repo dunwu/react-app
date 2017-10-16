@@ -25,6 +25,7 @@ module.exports = {
           title: '动画',
           type: 'ItemGroup',
           children: [
+            { key: 'gallery', title: '画廊', type: 'Item', url: '/example/gallery' },
             { key: 'animation-basic', title: '基础动画', type: 'Item', url: '/example/animation/basic' },
             { key: 'animation-example', title: '动画示例', type: 'Item', url: '/example/animation/example' }
           ]
