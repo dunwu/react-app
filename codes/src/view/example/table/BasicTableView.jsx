@@ -1,27 +1,16 @@
-import { Table } from 'antd';
+import { Avatar, Card, Col, Row, Table } from 'antd';
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import onPersonListSearch from './redux/actions';
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name'
-}, {
-  title: 'Age',
-  dataIndex: 'age'
-}, {
-  title: 'Email',
-  dataIndex: 'email'
-}, {
-  title: 'Address',
-  dataIndex: 'address'
-}];
-
 class BasicTableView extends React.Component {
   state = {
-    selectedRowKeys: []
+    selectedRowKeys: [],
+    filteredInfo: null,
+    sortedInfo: null
   };
 
   componentWillMount() {
@@ -31,6 +20,48 @@ class BasicTableView extends React.Component {
   onSelectChange = (selectedRowKeys) => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
+  };
+
+  onChange = (pagination, filters, sorter) => {
+    console.log('onChange parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter
+    });
+  };
+
+  onExpand = (record) => {
+    console.log('onExpand', record);
+    const nodes = [];
+    _.forIn(record, (value, key) => {
+      nodes.push({ key, value });
+    });
+
+    return (
+      <div style={{ marginTop: '12px' }}>
+        <Card width="100%" title="详细信息" style={{ fontSize: '16px' }}>
+          {nodes.map((node) => {
+            return (
+              <Row key={node.key}>
+                <Col span={6}>
+                  <h3 style={{ fontWeight: '600' }}>{node.key}</h3>
+                </Col>
+                <Col span={6}>
+                  <span>{node.value}</span>
+                </Col>
+              </Row>
+            );
+          })}
+        </Card>
+      </div>
+    );
+  };
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null
+    });
   };
 
   render() {
@@ -77,8 +108,62 @@ class BasicTableView extends React.Component {
       }],
       onSelection: this.onSelection
     };
+    let { sortedInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    const columns = [{
+      title: '头像',
+      dataIndex: 'avatar',
+      key: 'avatar',
+      render(text, record) {
+        return (<Avatar shape="square" size="large" src={record.avatar} icon="user" />);
+      }
+    }, {
+      title: '登录名',
+      dataIndex: 'loginName',
+      key: 'loginName',
+      sorter: (a, b) => a.loginName.length - b.loginName.length,
+      sortOrder: sortedInfo.columnKey === 'loginName' && sortedInfo.order
+    }, {
+      title: '姓名',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a, b) => a.name.length - b.name.length,
+      sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order
+    }, {
+      title: '生日',
+      dataIndex: 'birthday',
+      key: 'birthday',
+      sorter: (a, b) => a.birthday - b.birthday,
+      sortOrder: sortedInfo.columnKey === 'birthday' && sortedInfo.order
+    }, {
+      title: '邮件',
+      dataIndex: 'email',
+      key: 'email'
+    }, {
+      title: '电话',
+      dataIndex: 'tel',
+      key: 'tel'
+    }, {
+      title: '手机',
+      dataIndex: 'mobile',
+      key: 'mobile'
+    }, {
+      title: '地址',
+      dataIndex: 'address',
+      key: 'address'
+    }];
     return (
-      <Table rowSelection={rowSelection} columns={columns} dataSource={table.list} />
+      <div>
+        <Table
+          rowKey="loginName"
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={table.list}
+          loading={table.loading}
+          onChange={this.onChange}
+          expandedRowRender={this.onExpand}
+        />
+      </div>
     );
   }
 }
