@@ -21,13 +21,28 @@ module.exports = {
       type: 'SubMenu',
       children: [
         {
-          key: 'animation',
+          key: '/example/table',
+          title: '表格',
+          type: 'ItemGroup',
+          children: [
+            { key: '/example/table/basic', title: '基础表格', type: 'Item', url: '/example/table/basic' }
+          ]
+        },
+        {
+          key: '/example/image',
+          title: '图片',
+          type: 'ItemGroup',
+          children: [
+            { key: '/example/image/gallery', title: '画廊', type: 'Item', url: '/example/image/gallery' }
+          ]
+        },
+        {
+          key: '/example/animation',
           title: '动画',
           type: 'ItemGroup',
           children: [
-            { key: 'gallery', title: '画廊', type: 'Item', url: '/example/gallery' },
-            { key: 'animation-basic', title: '基础动画', type: 'Item', url: '/example/animation/basic' },
-            { key: 'animation-example', title: '动画示例', type: 'Item', url: '/example/animation/example' }
+            { key: '/example/animation/basic', title: '基础动画', type: 'Item', url: '/example/animation/basic' },
+            { key: '/example/animation/example', title: '动画示例', type: 'Item', url: '/example/animation/example' }
           ]
         }
       ]

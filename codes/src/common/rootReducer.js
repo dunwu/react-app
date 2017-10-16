@@ -7,10 +7,12 @@
 import { routerReducer as router } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import menu from '../component/layout/sider/redux/reducers';
+import table from '../view/example/table/redux/reducers';
 
 const reducerMap = {
   router,
-  menu
+  menu,
+  table
 };
 
 // combineReducers 的用法可以参考以下链接的内容

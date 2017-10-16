@@ -49,6 +49,7 @@
     "antd": "^2.13.4",
     "axios": "^0.16.2",
     "lodash": "^4.17.4",
+    "mockjs": "^1.0.1-beta3",
     "photoswipe": "^4.1.2",
     "react": "15.6.0",
     "react-dom": "15.6.0",
