@@ -60,7 +60,14 @@ module.exports = {
 
   // webpack 打包入口
   // 在生产环境中，我们仅仅想加载 polyfills 和 app 的代码.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: [
+    // require.resolve('./polyfills'),
+
+    // 您的应用程序的代码入口
+    // 我们最后包含应用程序代码，以便如果在初始化期间有运行时错误，
+    // 它不会破坏 WebpackDevServer 客户端，并且更改 JS 代码仍将触发刷新。
+    paths.appIndexJs
+  ],
 
   // webpack 如何输出结果的相关选项
   output: {

@@ -38,7 +38,7 @@ module.exports = {
   entry: [
 
     // 我们默认加载几个 polyfills
-    require.resolve('./polyfills'),
+    // require.resolve('./polyfills'),
 
     // 为 WebpackDevServer 添加备用客户端。
     // 客户端的工作是通过 socket 连接到 WebpackDevServer，并获得有关更改的通知。
