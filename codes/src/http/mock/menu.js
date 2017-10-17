@@ -71,6 +71,15 @@ module.exports = {
           ]
         }
       ]
+    },
+    {
+      key: 'tool',
+      title: '工具箱',
+      icon: 'tool',
+      type: 'SubMenu',
+      children: [
+        { key: '/tool/math', title: '数字工具', type: 'Item', url: '/tool/math' }
+      ]
     }
   ]
 };

@@ -12,11 +12,12 @@ import { CoreContainer } from '../component';
 import exampleRoutes from '../view/example/route';
 import generalRoutes from '../view/general/route';
 import uiRoutes from '../view/ui/route';
+import toolRoutes from '../view/tool/route';
 
 /**
  * 合并所有路由
  */
-export const childRoutes = _.concat(generalRoutes, exampleRoutes, uiRoutes);
+export const childRoutes = _.concat(generalRoutes, exampleRoutes, uiRoutes, toolRoutes);
 
 /**
  * 默认路由
