@@ -8,7 +8,6 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Content, Footer, Header, Sider } from '../';
 import { configRoute } from '../../common';
-import './CoreContainer.less';
 
 const RouteWithSubRoutes = (route) => (
   <Route

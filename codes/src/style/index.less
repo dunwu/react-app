@@ -1,0 +1,33 @@
+/*******************************************************************************
+这里的样式仅针对应用中的各个组件进行样式定制。
+各个视图页面的样式文件不要出现在 style 目录中，这样不利于各个页面样式的独立化。
+*******************************************************************************/
+
+/* 外部样式库 */
+@import "~animate.css";
+
+/* 内部样式库 */
+@import "variable";
+@import "global";
+@import "button";
+@import "card";
+@import "img";
+@import "layout";
+@import "scroll";
+
+#root, div[data-reactroot] {
+  height: 100%;
+}
+
+.gutter-example {
+  .ant-row {
+    > div {
+      background: transparent;
+      border: 0;
+    }
+  }
+}
+
+.gutter-box {
+  padding: 5px 0;
+}

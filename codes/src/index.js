@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import 'react-hot-loader/patch';
 import RootContainer from './component/container/RootContainer';
+import './style/index.less';
 
 const render = (Container) => {
   ReactDOM.render(
