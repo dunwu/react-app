@@ -106,7 +106,7 @@ module.exports = {
     ),
 
     // 使用的扩展名
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.js', '.json', '.jsx', '.css', '.less'],
 
     // 模块别名列表
     alias: {

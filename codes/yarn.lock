@@ -2241,6 +2241,18 @@ draft-js@^0.10.0, draft-js@~0.10.0:
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
+draftjs-to-html@^0.7.6:
+  version "0.7.6"
+  resolved "http://192.168.51.44/draftjs-to-html/-/draftjs-to-html-0.7.6.tgz#95bc55aeeca6c6a7abc242c5616946704c6685c9"
+
+draftjs-to-markdown@^0.4.5:
+  version "0.4.5"
+  resolved "http://192.168.51.44/draftjs-to-markdown/-/draftjs-to-markdown-0.4.5.tgz#1cb2da90bf7790ff23e24891441882a40fca6d53"
+
+draftjs-utils@^0.8.07:
+  version "0.8.8"
+  resolved "http://192.168.51.44/draftjs-utils/-/draftjs-utils-0.8.8.tgz#5835daed95f59d3ee1f96fdcbbb9809772c86490"
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "http://192.168.51.44/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -5970,6 +5982,14 @@ react-dom@15.6.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-draft-wysiwyg@^1.10.12:
+  version "1.10.12"
+  resolved "http://192.168.51.44/react-draft-wysiwyg/-/react-draft-wysiwyg-1.10.12.tgz#4a8c24094bde11dfbc540d86acd8321cb72ba01b"
+  dependencies:
+    classnames "^2.2.5"
+    draftjs-utils "^0.8.07"
+    prop-types "^15.5.10"
 
 react-error-overlay@^2.0.2:
   version "2.0.2"

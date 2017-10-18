@@ -80,7 +80,8 @@ module.exports = {
       type: 'SubMenu',
       children: [
         { key: '/tool/math', title: '数字工具', type: 'Item', url: '/tool/math' },
-        { key: '/tool/qrcode', title: '二维码', type: 'Item', url: '/tool/qrcode' }
+        { key: '/tool/qrcode', title: '二维码', type: 'Item', url: '/tool/qrcode' },
+        { key: '/tool/richeditor', title: '富文本编辑', type: 'Item', url: '/tool/richeditor' }
       ]
     }
   ]
