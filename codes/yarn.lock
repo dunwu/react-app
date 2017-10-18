@@ -5991,6 +5991,13 @@ react-draft-wysiwyg@^1.10.12:
     draftjs-utils "^0.8.07"
     prop-types "^15.5.10"
 
+react-draggable@^3.0.3:
+  version "3.0.3"
+  resolved "http://192.168.51.44/react-draggable/-/react-draggable-3.0.3.tgz#a6f9b3a7171981b76dadecf238316925cb9eacf4"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.5.10"
+
 react-error-overlay@^2.0.2:
   version "2.0.2"
   resolved "http://192.168.51.44/react-error-overlay/-/react-error-overlay-2.0.2.tgz#967b091962b17f5aeb4a60b1311b1736e1b6533d"

@@ -68,7 +68,8 @@ module.exports = {
           type: 'ItemGroup',
           children: [
             { key: '/ui/feedback/alert', title: '警告提示', type: 'Item', url: '/ui/feedback/alert' },
-            { key: '/ui/feedback/modal', title: '对话框', type: 'Item', url: '/ui/feedback/modal' }
+            { key: '/ui/feedback/modal', title: '对话框', type: 'Item', url: '/ui/feedback/modal' },
+            { key: '/ui/feedback/drag', title: '拖拽', type: 'Item', url: '/ui/feedback/drag' }
           ]
         }
       ]
