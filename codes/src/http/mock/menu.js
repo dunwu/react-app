@@ -54,20 +54,21 @@ module.exports = {
       type: 'SubMenu',
       children: [
         {
-          key: 'general',
+          key: '/ui/general',
           title: 'General',
           type: 'ItemGroup',
           children: [
-            { key: 'button', title: '按钮', type: 'Item', url: '/ui/button' },
-            { key: 'icon', title: '图标', type: 'Item', url: '/ui/icon' }
+            { key: '/ui/general/button', title: '按钮', type: 'Item', url: '/ui/general/button' },
+            { key: '/ui/general/icon', title: '图标', type: 'Item', url: '/ui/general/icon' }
           ]
         },
         {
-          key: 'feedback',
+          key: '/ui/feedback',
           title: 'Feedback',
           type: 'ItemGroup',
           children: [
-            { key: 'alert', title: 'Alert警告提示', type: 'Item', url: '/ui/alert' }
+            { key: '/ui/feedback/alert', title: '警告提示', type: 'Item', url: '/ui/feedback/alert' },
+            { key: '/ui/feedback/modal', title: '对话框', type: 'Item', url: '/ui/feedback/modal' }
           ]
         }
       ]

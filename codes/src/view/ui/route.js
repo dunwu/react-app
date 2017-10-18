@@ -1,14 +1,18 @@
-import AlertView from './AlertView';
-import ButtonView from './ButtonView';
-import IconView from './IconView';
+import AlertView from './Alert';
+import ButtonView from './Button';
+import IconView from './Icon';
+import ModalView from './Modal';
 
 export default [{
-  path: '/ui/button',
+  path: '/ui/general/button',
   component: ButtonView
 }, {
-  path: '/ui/icon',
+  path: '/ui/general/icon',
   component: IconView
 }, {
-  path: '/ui/alert',
+  path: '/ui/feedback/alert',
   component: AlertView
+}, {
+  path: '/ui/feedback/modal',
+  component: ModalView
 }];
