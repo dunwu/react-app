@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import img from './404.png';
 import './NotFoundView.less';
 
-export default class NotFoundView extends React.Component {
+export default class NotFoundView extends React.PureComponent {
   state = {
     animated: ''
   };

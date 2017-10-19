@@ -1,9 +1,15 @@
+/**
+ * 供非真实环境使用的菜单项仿真数据。
+ * 进入应用后，菜单栏会查询 /menu/list 接口获取菜单项数据。
+ * 被 axios-mock-adapter 拦截请求，将返回以下的模拟应答数据。
+ * @type {{code: number, message: string, data: [*]}}
+ */
+
 module.exports = {
   code: 0,
-  messages: '成功',
+  message: '成功',
   data: [
-    { key: 'home', title: '首页', icon: 'home', type: 'Item', url: '/home', children: [] },
-    {
+    { key: 'home', title: '首页', icon: 'home', type: 'Item', url: '/home', children: [] }, {
       key: 'general',
       title: '公共页面',
       icon: 'safety',
@@ -13,21 +19,12 @@ module.exports = {
         { key: 'mail', title: '邮箱', type: 'Item', url: '/mail' },
         { key: '404', title: '404', type: 'Item', url: '/404' }
       ]
-    },
-    {
+    }, {
       key: 'example',
       title: '示例',
       icon: 'video-camera',
       type: 'SubMenu',
       children: [
-        {
-          key: '/example/table',
-          title: '表格',
-          type: 'ItemGroup',
-          children: [
-            { key: '/example/table/basic', title: '基础表格', type: 'Item', url: '/example/table/basic' }
-          ]
-        },
         {
           key: '/example/image',
           title: '图片',
@@ -35,8 +32,7 @@ module.exports = {
           children: [
             { key: '/example/image/gallery', title: '画廊', type: 'Item', url: '/example/image/gallery' }
           ]
-        },
-        {
+        }, {
           key: '/example/animation',
           title: '动画',
           type: 'ItemGroup',
@@ -46,8 +42,7 @@ module.exports = {
           ]
         }
       ]
-    },
-    {
+    }, {
       key: 'ui',
       title: 'UI组件',
       icon: 'scan',
@@ -61,8 +56,14 @@ module.exports = {
             { key: '/ui/general/button', title: '按钮', type: 'Item', url: '/ui/general/button' },
             { key: '/ui/general/icon', title: '图标', type: 'Item', url: '/ui/general/icon' }
           ]
-        },
-        {
+        }, {
+          key: '/ui/data',
+          title: 'Data',
+          type: 'ItemGroup',
+          children: [
+            { key: '/ui/data/table', title: '表格', type: 'Item', url: '/ui/data/table' }
+          ]
+        }, {
           key: '/ui/feedback',
           title: 'Feedback',
           type: 'ItemGroup',
@@ -73,8 +74,7 @@ module.exports = {
           ]
         }
       ]
-    },
-    {
+    }, {
       key: 'tool',
       title: '工具箱',
       icon: 'tool',

@@ -63,7 +63,7 @@ class CustomHeader extends React.PureComponent {
           <Col xs={0} sm={2} md={4} lg={8} xl={8} />
           <Col xs={0} sm={6} md={6} lg={4} xl={4}>
             <Badge className="header-icon" count={5}>
-              <Link to="/mail">
+              <Link to="/ui/data/table">
                 <Icon type="mail" />
               </Link>
             </Badge>

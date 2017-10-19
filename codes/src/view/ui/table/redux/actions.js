@@ -13,7 +13,7 @@ const basicTableListSearchFailed = createAction(EXAMPLE_BASIC_TABLE_LIST_SEARCH_
 export default function onBasicTableListSearch(params) {
   return (dispatch) => {
     dispatch(basicTableListSearch());
-    http.get('/example/table/basic/list', { params })
+    http.get('/ui/table/basic/list', { params })
       .then((response) => {
         message.info('查询成功');
         dispatch(basicTableListSearchSuccess(response.data.data));

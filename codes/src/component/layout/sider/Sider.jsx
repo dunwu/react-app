@@ -16,7 +16,7 @@ const { Sider } = Layout;
  * 侧边导航栏组件。侧边栏采用的响应式布局方式，页面大小收缩到一定程度，侧边栏会隐藏。
  * @class
  */
-class CustomSider extends React.Component {
+class CustomSider extends React.PureComponent {
   render() {
     return (
       /**

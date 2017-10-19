@@ -7,7 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import 'react-hot-loader/patch';
-import RootContainer from './component/container/RootContainer';
+import RootContainer from './component/RootContainer';
 import './style/index.less';
 
 const render = (Container) => {
@@ -24,8 +24,8 @@ render(RootContainer);
 
 // 热替换启动 App
 if (module.hot) {
-  module.hot.accept('./component/container/RootContainer', () => {
-    const NextRootContainer = require('./component/container/RootContainer');
+  module.hot.accept('./component/RootContainer', () => {
+    const NextRootContainer = require('./component/RootContainer');
     render(NextRootContainer);
   });
 }

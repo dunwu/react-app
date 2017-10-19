@@ -1,7 +1,7 @@
 import { Button, Card, Col, Popconfirm, Row, Table } from 'antd';
 import React from 'react';
 
-class ExampleAnimationView extends React.Component {
+class ExampleAnimationView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.columns = [{

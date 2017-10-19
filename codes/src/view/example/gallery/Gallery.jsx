@@ -8,7 +8,7 @@ import React from 'react';
 /**
  * @see http://photoswipe.com/documentation/getting-started.html
  */
-class GalleryView extends React.Component {
+class GalleryView extends React.PureComponent {
   state = {
     gallery: null
   };

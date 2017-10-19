@@ -21,7 +21,7 @@ const isActive = (path, history) => {
 /**
  * 根据查询数据，动态加载菜单项
  */
-class CustomMenu extends React.Component {
+class CustomMenu extends React.PureComponent {
   state = {
     openKey: 'home',
     activeKey: 'home',

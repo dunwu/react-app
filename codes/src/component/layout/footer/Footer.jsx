@@ -18,7 +18,7 @@ class CustomFooter extends React.PureComponent {
   render() {
     return (
       <Footer className="ant-layout-footer">
-        Ant Admin © 2017 Created by Zhang Peng
+        Copyright © 2017 <a href="https://github.com/dunwu/" target="_blank">Zhang Peng</a><br />
       </Footer>
     );
   }

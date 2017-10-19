@@ -7,7 +7,7 @@
 import { routerReducer as router } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import menu from '../component/layout/menu/redux/reducers';
-import table from '../view/example/table/redux/reducers';
+import table from '../view/ui/table/redux/reducers';
 
 const reducerMap = {
   router,

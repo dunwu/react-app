@@ -43,6 +43,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',  // 限制可能包含 JSX 的文件扩展名
     'react/no-array-index-key': 'off',   // 限制数组索引作为 key
     'react/no-string-refs': 'off',
+    'react/jsx-no-target-blank': 'off',
 
     /* JSX 元素的 ESLint 检查规则 */
     /* @see https://github.com/evcohen/eslint-plugin-jsx-a11y */

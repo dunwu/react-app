@@ -23,7 +23,7 @@ const animations = [
 /**
  * 基础动画示例页面
  */
-class BasicAnimationView extends React.Component {
+class BasicAnimationView extends React.PureComponent {
   state = {
     animated: false,
     animatedOne: -1

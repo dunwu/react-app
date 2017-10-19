@@ -32,6 +32,6 @@ for (let i = 0; i < 46; i += 1) {
 
 module.exports = {
   code: 0,
-  messages: '成功',
+  message: '成功',
   data
 };

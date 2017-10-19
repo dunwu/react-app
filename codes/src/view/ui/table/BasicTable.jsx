@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import onPersonListSearch from './redux/actions';
 
-class BasicTableView extends React.Component {
+class BasicTable extends React.PureComponent {
   state = {
     selectedRowKeys: [],
     filteredInfo: null,
@@ -177,4 +177,4 @@ function mapDispatchToProps(dispatch) {
     onPersonListSearch: bindActionCreators(onPersonListSearch, dispatch)
   };
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BasicTableView));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BasicTable));

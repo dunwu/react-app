@@ -11,7 +11,7 @@ class WelcomeView extends React.PureComponent {
           <h1 className="App-title">Welcome to React App</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          React App 正在构建中。。。
         </p>
       </div>
     );
