@@ -3,11 +3,11 @@
  * @author Zhang Peng
  * @see https://ant.design/components/layout-cn/
  */
-import { Col, Layout, Row } from 'antd';
+import { Col, Icon, Layout, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Navpath from '../navpath/Navpath';
 
 import './SHCFHeader.less';
@@ -36,7 +36,14 @@ class CustomHeader extends React.PureComponent {
             <Navpath data={navpath} />
           </Col>
           <Col xs={0} sm={2} md={4} lg={8} xl={8} />
-          <Col xs={0} sm={6} md={6} lg={4} xl={4} />
+          <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+            <Link to="/setting">
+              <span className="setting-shcf" >
+                <Icon className="icon" type="setting" />
+                <span >设置</span>
+              </span>
+            </Link>
+          </Col>
         </Row>
       </Header>
     );

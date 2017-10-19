@@ -1,0 +1,2 @@
+export const APP_LAYOUT_INIT = 'APP_LAYOUT_INIT';
+export const APP_LAYOUT_CHANGE = 'APP_LAYOUT_CHANGE';

@@ -1,4 +1,5 @@
 import NotFoundView from './error/NotFoundView';
+import SettingView from './setting/Setting';
 import WelcomeView from './welcome/WelcomeView';
 
 export default [{
@@ -10,4 +11,7 @@ export default [{
 }, {
   path: '/404',
   component: NotFoundView
+}, {
+  path: '/setting',
+  component: SettingView
 }];
