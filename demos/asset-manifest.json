@@ -1,10 +1,14 @@
 {
-  "main.css": "static/css/main.e228a1df.css",
-  "main.css.map": "static/css/main.e228a1df.css.map",
-  "main.js": "static/js/main.f6f85045.js",
-  "main.js.map": "static/js/main.f6f85045.js.map",
+  "main.css": "static/css/main.93c2ff09.css",
+  "main.css.map": "static/css/main.93c2ff09.css.map",
+  "main.js": "static/js/main.74f8b244.js",
+  "main.js.map": "static/js/main.74f8b244.js.map",
+  "static/js/0.8c3ad964.chunk.js": "static/js/0.8c3ad964.chunk.js",
+  "static/js/0.8c3ad964.chunk.js.map": "static/js/0.8c3ad964.chunk.js.map",
+  "static/js/1.3cceb5bc.chunk.js": "static/js/1.3cceb5bc.chunk.js",
+  "static/js/1.3cceb5bc.chunk.js.map": "static/js/1.3cceb5bc.chunk.js.map",
   "static\\media\\404.png": "static/media/404.0a9677d9.png",
-  "static\\media\\antd.svg": "static/media/antd.d03e9c69.svg",
   "static\\media\\default-skin.svg": "static/media/default-skin.b257fa9c.svg",
+  "static\\media\\favicon.ico": "static/media/favicon.a17d5d3a.ico",
   "static\\media\\logo.svg": "static/media/logo.5d5d9eef.svg"
 }
