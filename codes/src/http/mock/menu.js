@@ -9,17 +9,7 @@ module.exports = {
   code: 0,
   message: '成功',
   data: [
-    { key: 'home', title: '首页', icon: 'home', type: 'Item', url: '/home', children: [] }, {
-      key: 'general',
-      title: '公共页面',
-      icon: 'safety',
-      type: 'SubMenu',
-      children: [
-        { key: 'welcome', title: '欢迎', type: 'Item', url: '/welcome' },
-        { key: 'mail', title: '邮箱', type: 'Item', url: '/mail' },
-        { key: '404', title: '404', type: 'Item', url: '/404' }
-      ]
-    }, {
+    {
       key: 'example',
       title: '示例',
       icon: 'video-camera',
@@ -44,7 +34,7 @@ module.exports = {
       ]
     }, {
       key: 'ui',
-      title: 'UI组件',
+      title: '组件',
       icon: 'scan',
       type: 'SubMenu',
       children: [
@@ -76,7 +66,7 @@ module.exports = {
       ]
     }, {
       key: 'tool',
-      title: '工具箱',
+      title: '工具',
       icon: 'tool',
       type: 'SubMenu',
       children: [

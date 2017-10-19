@@ -8,15 +8,21 @@ import { Provider } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import { configStore, history, rootRouter } from '../common';
-import { SHCFLayout } from './';
 
 // 创建 Redux Store，这是本应用唯一的状态管理容器
 const store = configStore();
 
 // 返回包裹了路由的 HCFLayout
-const WrappedHCFLayout = () => {
+const type = 'HCF';
+let Layout;
+if (type === 'HCF') {
+  Layout = require('./layout/HCFLayout').default;
+} else if (type === 'SHCF') {
+  Layout = require('./layout/SHCFLayout').default;
+}
+const WrappedLayout = () => {
   return (
-    <SHCFLayout>
+    <Layout>
       <Switch>
         {rootRouter.map((route) => (
           <Route
@@ -30,7 +36,7 @@ const WrappedHCFLayout = () => {
         <Redirect from="/" to="/home" />
         <Redirect from="*" to="/404" />
       </Switch>
-    </SHCFLayout>
+    </Layout>
   );
 };
 
@@ -43,7 +49,7 @@ export default class RootContainer extends React.PureComponent {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path="/" component={WrappedHCFLayout} />
+            <Route path="/" component={WrappedLayout} />
           </Switch>
         </ConnectedRouter>
       </Provider>

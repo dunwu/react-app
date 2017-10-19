@@ -7,7 +7,7 @@ import { Layout } from 'antd';
 import React from 'react';
 import Content from './content/Content';
 import Footer from './footer/Footer';
-import Header from './header/Header';
+import { SHCFHeader } from './header';
 import Sider from './sider/Sider';
 import './SHCFLayout.less';
 
@@ -17,8 +17,8 @@ class SHCFLayout extends React.PureComponent {
       <Layout className="ant-layout-has-sider">
         <Sider />
         <Layout>
-          <Header />
-          <Content>
+          <SHCFHeader />
+          <Content type="SHCF">
             {this.props.children}
           </Content>
           <Footer />

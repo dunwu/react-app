@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { Link, matchPath, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { onMenuItemSelected, onMenuListSearch } from './redux/actions';
+import './Menu.less';
 
 const isActive = (path, history) => {
   return matchPath(path, {
@@ -30,6 +31,9 @@ class CustomMenu extends React.PureComponent {
 
   componentWillMount() {
     this.props.onMenuListSearch();
+    this.setState({
+      mode: this.props.mode
+    });
   }
 
   componentWillReceiveProps(nextProps) {

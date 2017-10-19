@@ -7,8 +7,6 @@
 import { Card, Layout } from 'antd';
 import React from 'react';
 
-import './Content.less';
-
 const { Content } = Layout;
 
 /**
@@ -16,7 +14,27 @@ const { Content } = Layout;
  * @class
  */
 class CustomContent extends React.PureComponent {
+  state = {
+    type: 'HCF'
+  };
+
+  componentWillMount() {
+    this.setState({
+      type: this.props.type
+    });
+  }
+
   render() {
+    if (this.state.type === 'HCF') {
+      require.ensure([], (require) => {
+        require('./HCFContent.less');
+      });
+    } else if (this.state.type === 'SHCF') {
+      require.ensure([], (require) => {
+        require('./SHCFContent.less');
+      });
+    }
+
     return (
       <Content className="ant-layout-content">
         <Card noHovering bordered={false} bodyStyle={{ padding: 0 }}>

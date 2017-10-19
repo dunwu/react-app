@@ -6,7 +6,7 @@
 import { Layout } from 'antd';
 import React from 'react';
 import Menu from '../menu/Menu';
-import logoImg from './antd.svg';
+import Logo from '../logo/Logo';
 
 import './Sider.less';
 
@@ -29,13 +29,8 @@ class CustomSider extends React.PureComponent {
         breakpoint="lg"
         collapsedWidth="0"
       >
-        <div className="ant-layout-logo">
-          <div className="logo-container">
-            <img alt="antd.svg" src={logoImg} />
-            <span>REACT APP</span>
-          </div>
-        </div>
-        <Menu />
+        <Logo />
+        <Menu mode="inline" />
       </Sider>
     );
   }
